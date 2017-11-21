@@ -69,6 +69,8 @@ public class FractionSimplifier extends javax.swing.JFrame {
             }
         });
         Panel1.add(calc, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, -1, -1));
+
+        output.setEditable(false);
         Panel1.add(output, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 290, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -89,8 +91,14 @@ public class FractionSimplifier extends javax.swing.JFrame {
 
     }//GEN-LAST:event_numInputActionPerformed
 
+    /**
+     * this sets the output to the reduced fraction 
+     * pre: button clicked 
+     * post: output set
+     * @param evt
+     */
     private void calcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcActionPerformed
-    output.setText(reduce(Integer.parseInt(numInput.getText()),Integer.parseInt(denInput.getText())));
+        output.setText(reduce(Integer.parseInt(numInput.getText()), Integer.parseInt(denInput.getText())));
     }//GEN-LAST:event_calcActionPerformed
 
     /**
@@ -140,16 +148,27 @@ public class FractionSimplifier extends javax.swing.JFrame {
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * This method returns the statement for the output, it also calls the
+     * reducer method 
+     * pre: none 
+     * post: returns the output statement
+     */
     private String reduce(int num, int den) {
         int divisor = reducer(num, den);
-        return(num + "/" + den + " reduces to " + (num/divisor) + "/" + (den/divisor));
+        return (num + "/" + den + " reduces to " + (num / divisor) + "/" + (den / divisor));
     }
 
+    /**
+     * This finds the GCD of the two integers inputs
+     * pre: none
+     * post: returns the GCD of the ints
+     */
     private int reducer(int num, int den) {
-        if(den == 0){
+        if (den == 0) {
             return num;
-        }else{
-            return(reducer(den, num%den));
+        } else {
+            return (reducer(den, num % den));
         }
     }
 }
